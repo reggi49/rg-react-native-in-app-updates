@@ -1,0 +1,32 @@
+{
+  "name": "rg-react-native-in-app-updates",
+  "version": "1.0.0",
+  "description": "Simple Package In App Updates For React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reggi49/rg-react-native-in-app-updates.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "in",
+    "app",
+    "updates",
+    "android",
+    "ios"
+  ],
+  "author": "reggi49",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reggi49/rg-react-native-in-app-updates/issues"
+  },
+  "homepage": "https://github.com/reggi49/rg-react-native-in-app-updates#readme",
+  "dependencies": {
+    "react-native-device-info": "^8.1.2",
+    "axios": "^0.19.2"
+  }
+}
