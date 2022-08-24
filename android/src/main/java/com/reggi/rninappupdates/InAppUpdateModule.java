@@ -1,4 +1,4 @@
-package com.ecatalog;
+package com.reggi.rninappupdates;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -111,8 +111,9 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule implements Ins
                 Snackbar.make(Objects.requireNonNull(reactContext.getCurrentActivity()).findViewById(android.R.id.content).getRootView(),
                         "An update has just been downloaded.",
                         Snackbar.LENGTH_INDEFINITE);
+        snackbar.getView().setBackgroundColor(Color.WHITE);
         snackbar.setAction("RESTART", view -> appUpdateManager.completeUpdate());
-        snackbar.setActionTextColor(Color.YELLOW);
+        snackbar.setActionTextColor(Color.BLACK);
         snackbar.show();
     }
 
