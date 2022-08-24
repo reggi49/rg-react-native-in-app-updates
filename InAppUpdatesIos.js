@@ -1,4 +1,3 @@
-import React from "react";
 import { Alert, Linking } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import apisauce from "apisauce";

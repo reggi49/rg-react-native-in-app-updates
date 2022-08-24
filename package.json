@@ -28,5 +28,8 @@
   "dependencies": {
     "apisauce": "^2.1.6",
     "react-native-device-info": "^10.0.2"
+  },
+   "resolutions": {
+    "react-native-device-info": "^6.2.1"
   }
 }
