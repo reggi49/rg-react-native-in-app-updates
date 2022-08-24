@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert, Linking } from "react-native";
 import DeviceInfo from "react-native-device-info";
-import axios from "axios";
+import apisauce from "apisauce";
 
 const defaultCheckOptions = {
   bundleId: DeviceInfo.getBundleId(),
@@ -9,7 +9,7 @@ const defaultCheckOptions = {
 };
 
 const createAPI = () => {
-  const api = axios.create({
+  const api = apisauce.create({
     baseURL: "https://itunes.apple.com/",
     headers: {
       "Cache-Control": "no-cache",

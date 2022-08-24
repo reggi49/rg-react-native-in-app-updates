@@ -1,4 +1,5 @@
 import { Platform, NativeModules } from "react-native";
+import performCheck, { promptUser } from "./InAppUpdatesIos";
 
 const RgInAppUpdates = () => {
   if (Platform.OS === "ios") {
