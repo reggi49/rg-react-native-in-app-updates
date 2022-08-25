@@ -1,6 +1,6 @@
 {
   "name": "rg-react-native-in-app-updates",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Simple Package In App Updates For React Native",
   "main": "index.js",
   "scripts": {
@@ -27,9 +27,6 @@
   "homepage": "https://github.com/reggi49/rg-react-native-in-app-updates#readme",
   "dependencies": {
     "apisauce": "^2.1.6",
-    "react-native-device-info": "^10.0.2"
-  },
-   "resolutions": {
-    "react-native-device-info": "^6.2.1"
+    "react-native-device-info": "^8.1.2"
   }
 }
