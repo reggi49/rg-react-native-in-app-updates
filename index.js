@@ -1,7 +1,7 @@
-import React from 'react';
-import { Alert, Linking, Platform, NativeModules } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
-import apisauce from 'apisauce';
+import React from "react";
+import { Alert, Linking, Platform, NativeModules } from "react-native";
+import DeviceInfo from "react-native-device-info";
+import apisauce from "apisauce";
 
 const defaultCheckOptions = {
   bundleId: DeviceInfo.getBundleId(),
@@ -25,7 +25,9 @@ const createAPI = () => {
 };
 
 const performCheck = ({
-  bundleId = defaultCheckOptions.bundleId,
+  localVersion,
+  bundleIdentifier,
+  bundleId = bundleIdentifier || defaultCheckOptions.bundleId,
   country,
 } = defaultCheckOptions) => {
   let updateIsAvailable = false;
@@ -35,7 +37,8 @@ const performCheck = ({
     let latestInfo = null;
     if (response.data.resultCount === 1) {
       latestInfo = response.data.results[0];
-      updateIsAvailable = latestInfo.version !== DeviceInfo.getVersion();
+      updateIsAvailable =
+        latestInfo.version !== localVersion || DeviceInfo.getVersion();
     }
 
     return { updateIsAvailable, ...latestInfo };
@@ -62,7 +65,7 @@ const showUpgradePrompt = (
     message = message,
     buttonUpgradeText = buttonUpgradeText,
     buttonCancelText = buttonCancelText,
-    forceUpgrade = false,
+    forceUpgrade = forceUpgrade,
   }
 ) => {
   const buttons = [
@@ -80,37 +83,45 @@ const showUpgradePrompt = (
 };
 
 export const promptUser = (
-  defaultOptions = {},
-  versionSpecificOptions = [],
-  bundleId,
+  localVersion,
+  bundleIdentifier,
+  bundleId = bundleIdentifier || defaultCheckOptions.bundleId,
   country = undefined
 ) => {
   performCheck({ bundleId, country }).then((result) => {
     if (result.updateIsAvailable) {
-      const options =
-        versionSpecificOptions.find(
-          (o) => o.localVersion === DeviceInfo.getVersion()
-        ) || defaultOptions;
-
+      const options = localVersion || DeviceInfo.getVersion();
       showUpgradePrompt(result.trackId, options);
     }
   });
 };
 
-const RgInAppUpdates = () => {
+const RgInAppUpdates = ({
+  title = title || "Update Available",
+  message = message ||
+    "There is an updated version available on the App Store. Would you like to upgrade?",
+  buttonUpgradeText = buttonUpgradeText || "Update",
+  buttonCancelText = buttonCancelText || "Cancel",
+  forceUpgrade = forceUpgrade,
+  localVersion = localVersion,
+  bundleIdentifier = bundleIdentifier,
+}) => {
   if (Platform.OS === "ios") {
-    performCheck().then(({ updateIsAvailable }) => {
-      if (updateIsAvailable) {
-        promptUser({
-          title: title || "Update Available",
-          message:
-            message ||
-            "There is an updated version available on the App Store. Would you like to upgrade?",
-          buttonUpgradeText: buttonUpgradeText || "Upgrade",
-          buttonCancelText: buttonCancelText || "Cancel",
-        });
+    performCheck({ bundleIdentifier, localVersion }).then(
+      ({ updateIsAvailable }) => {
+        if (updateIsAvailable) {
+          promptUser({
+            title,
+            message,
+            buttonUpgradeText,
+            buttonCancelText,
+            forceUpgrade,
+            localVersion,
+            bundleIdentifier,
+          });
+        }
       }
-    });
+    );
   } else {
     NativeModules.InAppUpdate.checkUpdate();
   }
