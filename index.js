@@ -12,9 +12,7 @@ const RgInAppUpdates = ({
   localVersion = localVersion,
   bundleIdentifier = bundleIdentifier,
 }) => {
-  console.log('localVersion',localVersion)
   if (Platform.OS === "ios" && !localVersion && !bundleIdentifier) {
-    console.log('masuk ios rdi')
     performCheck().then(
         ({ updateIsAvailable }) => {
           if (updateIsAvailable) {
@@ -29,7 +27,6 @@ const RgInAppUpdates = ({
         }
       );
   } else if (Platform.OS === "ios")  {
-    console.log('masuk ios nrdi')
     performCheckn({ bundleIdentifier, localVersion }).then(
         ({ updateIsAvailable }) => {
           if (updateIsAvailable) {

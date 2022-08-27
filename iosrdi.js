@@ -72,7 +72,7 @@ const showUpgradePrompt = (
     },
   ];
 
-  if (forceUpgrade === false) {
+  if (forceUpgrade === false || forceUpgrade === undefined) {
     buttons.push({ text: buttonCancelText });
   }
 
@@ -80,13 +80,13 @@ const showUpgradePrompt = (
 };
 
 export const promptUser = (
-  bundleIdentifier,
+  versionRules,
   bundleId = defaultCheckOptions.bundleId,
   country = undefined,
 ) => {
   performCheck({ bundleId, country }).then((result) => {
     if (result.updateIsAvailable) {
-      const options = DeviceInfo.getVersion();
+      const options = versionRules
       showUpgradePrompt(result.trackId, options);
     }
   });

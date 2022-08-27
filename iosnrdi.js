@@ -29,7 +29,6 @@ const performCheckn = ({
 } = defaultCheckOptions) => {
   let updateIsAvailable = false;
   const api = createAPI();
-
   return api.getLatest(bundleId, country).then((response) => {
     let latestInfo = null;
     if (response.data.resultCount === 1) {
@@ -72,22 +71,22 @@ const showUpgradePrompt = (
     },
   ];
 
-  if (forceUpgrade === false) {
+  if (forceUpgrade === false || forceUpgrade === undefined) {
     buttons.push({ text: buttonCancelText });
   }
 
   Alert.alert(title, message, buttons, { cancelable: !!forceUpgrade });
 };
 
-export const promptUser = (
-  localVersion,
-  bundleIdentifier,
-  bundleId = bundleIdentifier,
+export const promptUsern = (
+  versionRules,
+  localVersion = versionRules.localVersion,
+  bundleId = versionRules.bundleIdentifier,
   country = undefined
 ) => {
-  performCheck({ bundleId, country }).then((result) => {
+  performCheckn({ localVersion, bundleId, country }).then((result) => {
     if (result.updateIsAvailable) {
-      const options = localVersion;
+      const options = versionRules;
       showUpgradePrompt(result.trackId, options);
     }
   });
