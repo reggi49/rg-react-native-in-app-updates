@@ -1,6 +1,6 @@
 {
   "name": "rg-react-native-in-app-updates",
-  "version": "1.0.7",
+  "version": "1.0.5",
   "description": "Simple Package In App Updates For React Native",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "android",
     "ios"
   ],
-   "author": {
+  "author": {
     "name": "reggi49",
     "email": "reggi49@gmail.com"
   },

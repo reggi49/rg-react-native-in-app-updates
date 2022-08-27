@@ -1,100 +1,6 @@
-import React from "react";
-import { Alert, Linking, Platform, NativeModules } from "react-native";
-import DeviceInfo from "react-native-device-info";
-import apisauce from "apisauce";
-
-const defaultCheckOptions = {
-  bundleId: DeviceInfo.getBundleId(),
-  country: undefined,
-};
-
-const createAPI = () => {
-  const api = apisauce.create({
-    baseURL: "https://itunes.apple.com/",
-    headers: {
-      "Cache-Control": "no-cache",
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    timeout: 10000,
-  });
-
-  return {
-    getLatest: (bundleId) => api.get("lookup?bundleId=" + bundleId),
-  };
-};
-
-const performCheck = ({
-  localVersion,
-  bundleIdentifier,
-  bundleId = bundleIdentifier || defaultCheckOptions.bundleId,
-  country,
-} = defaultCheckOptions) => {
-  let updateIsAvailable = false;
-  const api = createAPI();
-
-  return api.getLatest(bundleId, country).then((response) => {
-    let latestInfo = null;
-    if (response.data.resultCount === 1) {
-      latestInfo = response.data.results[0];
-      updateIsAvailable =
-        latestInfo.version !== localVersion || DeviceInfo.getVersion();
-    }
-
-    return { updateIsAvailable, ...latestInfo };
-  });
-};
-
-const attemptUpgrade = (appId) => {
-  const appStoreURI = `itms-apps://apps.apple.com/app/id${appId}?mt=8`;
-  const appStoreURL = `https://apps.apple.com/app/id${appId}?mt=8`;
-
-  Linking.canOpenURL(appStoreURI).then((supported) => {
-    if (supported) {
-      Linking.openURL(appStoreURI);
-    } else {
-      Linking.openURL(appStoreURL);
-    }
-  });
-};
-
-const showUpgradePrompt = (
-  appId,
-  {
-    title = title,
-    message = message,
-    buttonUpgradeText = buttonUpgradeText,
-    buttonCancelText = buttonCancelText,
-    forceUpgrade = forceUpgrade,
-  }
-) => {
-  const buttons = [
-    {
-      text: buttonUpgradeText,
-      onPress: () => attemptUpgrade(appId),
-    },
-  ];
-
-  if (forceUpgrade === false) {
-    buttons.push({ text: buttonCancelText });
-  }
-
-  Alert.alert(title, message, buttons, { cancelable: !!forceUpgrade });
-};
-
-export const promptUser = (
-  localVersion,
-  bundleIdentifier,
-  bundleId = bundleIdentifier || defaultCheckOptions.bundleId,
-  country = undefined
-) => {
-  performCheck({ bundleId, country }).then((result) => {
-    if (result.updateIsAvailable) {
-      const options = localVersion || DeviceInfo.getVersion();
-      showUpgradePrompt(result.trackId, options);
-    }
-  });
-};
+import {Platform, NativeModules } from "react-native";
+import performCheck, { promptUser } from "rg-react-native-in-app-updates/iosrdi";
+import performCheckn, { promptUsern } from "rg-react-native-in-app-updates/iosnrdi";
 
 const RgInAppUpdates = ({
   title = title || "Update Available",
@@ -106,22 +12,39 @@ const RgInAppUpdates = ({
   localVersion = localVersion,
   bundleIdentifier = bundleIdentifier,
 }) => {
-  if (Platform.OS === "ios") {
-    performCheck({ bundleIdentifier, localVersion }).then(
-      ({ updateIsAvailable }) => {
-        if (updateIsAvailable) {
-          promptUser({
-            title,
-            message,
-            buttonUpgradeText,
-            buttonCancelText,
-            forceUpgrade,
-            localVersion,
-            bundleIdentifier,
-          });
+  console.log('localVersion',localVersion)
+  if (Platform.OS === "ios" && !localVersion && !bundleIdentifier) {
+    console.log('masuk ios rdi')
+    performCheck().then(
+        ({ updateIsAvailable }) => {
+          if (updateIsAvailable) {
+            promptUser({
+              title,
+              message,
+              buttonUpgradeText,
+              buttonCancelText,
+              forceUpgrade,
+            });
+          }
         }
-      }
-    );
+      );
+  } else if (Platform.OS === "ios")  {
+    console.log('masuk ios nrdi')
+    performCheckn({ bundleIdentifier, localVersion }).then(
+        ({ updateIsAvailable }) => {
+          if (updateIsAvailable) {
+            promptUsern({
+              title,
+              message,
+              buttonUpgradeText,
+              buttonCancelText,
+              forceUpgrade,
+              localVersion,
+              bundleIdentifier,
+            });
+          }
+        }
+      );
   } else {
     NativeModules.InAppUpdate.checkUpdate();
   }
