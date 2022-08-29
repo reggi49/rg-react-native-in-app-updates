@@ -16,7 +16,12 @@ On  **iOS**  you may need to also add the following lines in your Info.plist to 
       <string>itms-apps</string>
     </array>
 
-This package uses **react-native-device-info** if you don't define a bundle Identifier and local version of the application. to install it run the following command.
+### Troubleshooting
+ if error appear :
+
+    Error: @react-native-community/react-native-device-info: NativeModule.RNDeviceInfo is null.
+
+ You can install manually package **react-native-device-info** if you don't define a bundle Identifier and local version of the application. to install it run the following command.
 
 Using npm:
 
@@ -33,6 +38,7 @@ then
 ## Options IOS Only
 
 |value|type|description|
+|--|--|--|
 |localVersion (**IOS Only**)| String (Required if not uses **react-native-device-info**) | version currently running on the device|
 |bundleIdentifier (**IOS Only**)|String (Required if not uses **react-native-device-info**)(**IOS Only**) | bundle identifier on Xcode |
 |title **IOS Only**)|String(Optional) | The title of the alert prompt when there's a new version. (default: `Update Available`) |
@@ -40,4 +46,3 @@ then
 |message|String(Optional)|The content of the alert prompt when there's a new version (default:  `There is an updated version available on the App Store. Would you like to update?`)|
 |buttonUpdateText| String(Optional) |The text of the confirmation button on the alert prompt (default:  `Update` )|
 |buttonCancelText| String(Optional) | The text of the cancelation button on the alert prompt (default:  `Cancel`)|
-
