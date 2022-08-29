@@ -41,8 +41,28 @@ then
 |--|--|--|
 |localVersion (**IOS Only**)| String (Required if not uses **react-native-device-info**) | version currently running on the device|
 |bundleIdentifier (**IOS Only**)|String (Required if not uses **react-native-device-info**)(**IOS Only**) | bundle identifier on Xcode |
-|title **IOS Only**)|String(Optional) | The title of the alert prompt when there's a new version. (default: `Update Available`) |
+|title (**IOS Only**)|String(Optional) | The title of the alert prompt when there's a new version. (default: `Update Available`) |
 |forceUpgrade| boolean (optional) | If set to true the user won't be able to cancel the upgrade (default:  `false`)|
 |message|String(Optional)|The content of the alert prompt when there's a new version (default:  `There is an updated version available on the App Store. Would you like to update?`)|
 |buttonUpdateText| String(Optional) |The text of the confirmation button on the alert prompt (default:  `Update` )|
 |buttonCancelText| String(Optional) | The text of the cancelation button on the alert prompt (default:  `Cancel`)|
+
+
+# Usage
+
+        import  RgInAppUpdates  from  'rg-react-native-in-app-updates';
+        
+        const  versionRules = {
+        localVersion: '1.0.0', //(optional) prefer not uses react-native-device-info
+        bundleIdentifier: 'com.package', //(optional) prefer not uses react-native-device-info
+        forceUpgrade:  false,
+        title:  'Update Tersedia',
+        message:
+        'Ada versi terbaru yang tersedia di App Store. Apakah Anda ingin Update?',
+        buttonUpgradeText:  'Update', 
+        };
+        
+        //call in componentDidMount() or useeffect()
+        RgInAppUpdates(versionRules);
+        or 
+        RgInAppUpdates({});
