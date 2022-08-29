@@ -42,9 +42,9 @@ then
 
 |value|type|description|
 |--|--|--|
-|localVersion (**IOS Only**)| String (Required if not uses **react-native-device-info**) | version currently running on the device|
-|bundleIdentifier (**IOS Only**)|String (Required if not uses **react-native-device-info**)(**IOS Only**) | bundle identifier on Xcode |
-|title (**IOS Only**)|String(Optional) | The title of the alert prompt when there's a new version. (default: `Update Available`) |
+|localVersion| String (Required if not uses **react-native-device-info**) | version currently running on the device|
+|bundleIdentifier|String (Required if not uses **react-native-device-info**)(**IOS Only**) | bundle identifier on Xcode |
+|title|String(Optional) | The title of the alert prompt when there's a new version. (default: `Update Available`) |
 |forceUpgrade| boolean (optional) | If set to true the user won't be able to cancel the upgrade (default:  `false`)|
 |message|String(Optional)|The content of the alert prompt when there's a new version (default:  `There is an updated version available on the App Store. Would you like to update?`)|
 |buttonUpdateText| String(Optional) |The text of the confirmation button on the alert prompt (default:  `Update` )|
