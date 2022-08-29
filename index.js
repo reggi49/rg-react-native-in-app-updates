@@ -6,42 +6,40 @@ const RgInAppUpdates = ({
   title = title || "Update Available",
   message = message ||
     "There is an updated version available on the App Store. Would you like to upgrade?",
-  buttonUpgradeText = buttonUpgradeText || "Update",
+  buttonUpdateText = buttonUpdateText || "Update",
   buttonCancelText = buttonCancelText || "Cancel",
   forceUpgrade = forceUpgrade,
   localVersion = localVersion,
   bundleIdentifier = bundleIdentifier,
 }) => {
   if (Platform.OS === "ios" && !localVersion && !bundleIdentifier) {
-    performCheck().then(
-        ({ updateIsAvailable }) => {
-          if (updateIsAvailable) {
-            promptUser({
-              title,
-              message,
-              buttonUpgradeText,
-              buttonCancelText,
-              forceUpgrade,
-            });
-          }
-        }
-      );
-  } else if (Platform.OS === "ios")  {
+    performCheck().then(({ updateIsAvailable }) => {
+      if (updateIsAvailable) {
+        promptUser({
+          title,
+          message,
+          buttonUpdateText,
+          buttonCancelText,
+          forceUpgrade,
+        });
+      }
+    });
+  } else if (Platform.OS === "ios") {
     performCheckn({ bundleIdentifier, localVersion }).then(
-        ({ updateIsAvailable }) => {
-          if (updateIsAvailable) {
-            promptUsern({
-              title,
-              message,
-              buttonUpgradeText,
-              buttonCancelText,
-              forceUpgrade,
-              localVersion,
-              bundleIdentifier,
-            });
-          }
+      ({ updateIsAvailable }) => {
+        if (updateIsAvailable) {
+          promptUsern({
+            title,
+            message,
+            buttonUpdateText,
+            buttonCancelText,
+            forceUpgrade,
+            localVersion,
+            bundleIdentifier,
+          });
         }
-      );
+      }
+    );
   } else {
     NativeModules.InAppUpdate.checkUpdate();
   }

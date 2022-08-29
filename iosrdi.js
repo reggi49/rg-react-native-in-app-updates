@@ -60,14 +60,14 @@ const showUpgradePrompt = (
   {
     title = title,
     message = message,
-    buttonUpgradeText = buttonUpgradeText,
+    buttonUpdateText = buttonUpdateText,
     buttonCancelText = buttonCancelText,
     forceUpgrade = forceUpgrade,
   }
 ) => {
   const buttons = [
     {
-      text: buttonUpgradeText,
+      text: buttonUpdateText,
       onPress: () => attemptUpgrade(appId),
     },
   ];

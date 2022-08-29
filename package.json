@@ -1,6 +1,6 @@
 {
-  "name": "@reggi49/rg-react-native-in-app-updates",
-  "version": "1.0.8",
+  "name": "rg-react-native-in-app-updates",
+  "version": "1.0.9",
   "description": "Simple Package In App Updates For React Native",
   "main": "index.js",
   "scripts": {
