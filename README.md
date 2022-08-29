@@ -1,7 +1,8 @@
 # rg-react-native-in-app-updates
 Simple Package In App Updates For React Native supports on both Android and IOS.
 
-![Android Version](https://images2.imgbox.com/52/1e/P4DsXevR_o.jpeg "Android Version" =243x) ![IOS Version](https://images2.imgbox.com/5c/95/73w8q4k6_o.png "IOS Version" =250x)
+<img src="https://images2.imgbox.com/52/1e/P4DsXevR_o.jpeg" width="200" height="400" /> <img src="https://images2.imgbox.com/ac/78/2pRcbvJ8_o.png" width="200" height="400" />
+
 
 # Getting started
 rg-react-native-in-app-updates is a package/module created to support your app to update itself. whereas on ios devices the app only shows a prompt to update the app.
