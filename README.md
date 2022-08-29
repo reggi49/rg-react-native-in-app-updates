@@ -2,13 +2,13 @@
 Simple Package In App Updates For React Native supports on both Android and IOS.
 
 # Getting started
-rg-react-native-in-app-updates is a package/module created to support your app to update itself. whereas on ios devices the app only shows a prompt to update the app.# Files
+rg-react-native-in-app-updates is a package/module created to support your app to update itself. whereas on ios devices the app only shows a prompt to update the app.
 
 # Installation
 
     npm i rg-react-native-in-app-updates
 
-**For IOS Only :** 
+### For IOS Only : 
 On  **iOS**  you may need to also add the following lines in your Info.plist to be able to launch the store deep link.
 
     <key>LSApplicationQueriesSchemes</key>
@@ -16,7 +16,7 @@ On  **iOS**  you may need to also add the following lines in your Info.plist to 
       <string>itms-apps</string>
     </array>
 
-### Troubleshooting
+#### Troubleshooting
  if error appear :
 
     Error: @react-native-community/react-native-device-info: NativeModule.RNDeviceInfo is null.
